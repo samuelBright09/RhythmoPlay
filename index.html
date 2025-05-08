@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./assets/styles/reset.css" />
+    <link rel="stylesheet" href="./assets/styles/style.css" />
+    <script type="module" src="./scripts/player.js"></script>
+    <title>RhythmoPlay</title>
+  </head>
+
+  <body>
+    <main>
+      <div class="main-container">
+        <!-- sidebar -->
+        <div class="sidebar-and-content">
+          <nav class="sidebar">
+            <span>RhythmoPlay</span>
+
+            <div class="links">
+              <span> <i class="fa-thin fa-house"></i>Home </span>
+              <span>Categories</span>
+              <span>Artists</span>
+              <span>Playlists</span>
+            </div>
+
+            <span>Logout</span>
+          </nav>
+
+          <div class="content">
+            <!-- settings -->
+            <header>
+              <div class="branding-and-utility">
+                <div>
+                  <input
+                    type="search"
+                    id="music-search"
+                    placeholder="Search for a song"
+                  />
+                  <!-- profile, settings and favs -->
+                  <div class="profile-and-settings">
+                    <div class="profile-container">
+                      <div class="profile-image">
+                        <img
+                          src="./assets/images/profile3.jpg"
+                          alt="profile picture"
+                        />
+                      </div>
+                      <div class="user-details">
+                        <p>User name</p>
+                        <p>premium</p>
+                      </div>
+                    </div>
+                    <!-- favs and settings -->
+                    <div class="fav-and-settings">
+                      <i class="fa-light fa-heart"></i>
+                      <i class="fa-light fa-heart"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            <div class="song-list">
+              <div class="song-card">
+                <div class="cover-art">
+                  <img src="./assets/images/profile3.jpg" alt="cover-art" />
+                </div>
+                <div class="overlay">
+                  <div class="info">
+                    <p>Artist Name</p>
+                    <p>Song Title</p>
+                  </div>
+                  <button>Play</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="categories">
+              <h3>Select Categories</h3>
+              <div class="category-btns">
+                <button>All</button>
+                <button>Gospel</button>
+                <button>Jazz</button>
+                <button>Orchestra</button>
+                <button>Raggae</button>
+                <button>RnB</button>
+                <button>Soul</button>
+                <button>Ministrations</button>
+                <button>Hip Hop</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- player -->
+        <div class="player">
+          <div class="now-playing">
+            <div class="song-details">
+              <div class="playing-cover-art">
+                <img src="./assets/images/profile2.jpg" alt="Cover art" />
+              </div>
+              <div class="song-info">
+                <p>Song Title</p>
+                <p>artist</p>
+              </div>
+            </div>
+
+            <!-- actions -->
+            <div class="action-btns">
+              <button>Prev</button>
+              <button>Play</button>
+              <button>Next</button>
+            </div>
+
+            <!-- progress bar -->
+            <div class="progress-container">
+              <input
+                type="range"
+                id="progress-bar"
+                value="0"
+                min="0"
+                max="100"
+              />
+              <div class="time-track">
+                <p>00:00</p>
+                <p>00:00</p>
+              </div>
+            </div>
+            <!-- other-actions -->
+             <div class="other-actions">
+              <button>fav</button>
+              <button>Shuffle</button>
+              <button>Reapeat</button>
+              <button>Volume</button>
+             </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
