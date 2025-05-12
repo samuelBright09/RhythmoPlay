@@ -21,6 +21,7 @@ const pauseIcon = document.querySelector(".pause-icon");
 
 // load songs
 async function loadSongsInOrder() {
+    songContainer.innerHTML = '';
   const loadingContainer = document.createElement('div');
   loadingContainer.className = 'loading-container';
   loadingContainer.innerHTML = `
