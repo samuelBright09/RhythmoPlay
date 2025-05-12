@@ -6,8 +6,18 @@
 
     <link rel="stylesheet" href="./assets/styles/reset.css" />
     <link rel="stylesheet" href="./assets/styles/style.css" />
-    <script defer src="https://cdn.jsdelivr.net/npm/jsmediatags@latest/dist/jsmediatags.min.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/jsmediatags@latest/dist/jsmediatags.min.js"
+    ></script>
     <script type="module" src="./scripts/player.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>RhythmoPlay</title>
   </head>
 
@@ -17,28 +27,33 @@
         <!-- sidebar -->
         <div class="sidebar-and-content">
           <nav class="sidebar">
-            <span>RhythmoPlay</span>
+            <span
+              ><span><i data-lucide="audio-waveform"></i></span
+              >RhythmoPlay</span
+            >
 
             <div class="links">
-              <span> <i class="fa-thin fa-house"></i>Home </span>
-              <span>Categories</span>
-              <span>Artists</span>
-              <span>Playlists</span>
+              <span><i data-lucide="home"></i>Home </span>
+              <span><i data-lucide="layout-grid"></i>Categories</span>
+              <span><i data-lucide="user-round"></i>Artists</span>
+              <span><i data-lucide="list-music"></i>Playlists</span>
             </div>
 
-            <span>Logout</span>
+            <span><i data-lucide="log-out"></i>Logout</span>
           </nav>
 
           <div class="content">
-            <!-- settings -->
             <header>
               <div class="branding-and-utility">
                 <div>
-                  <input
-                    type="search"
-                    id="music-search"
-                    placeholder="Search for a song"
-                  />
+                  <div class="music-search" tabindex="0">
+                    <input
+                      type="search"
+                      id="search"
+                      placeholder="Search for a song"
+                    />
+                    <i data-lucide="search"></i>
+                  </div>
                   <!-- profile, settings and favs -->
                   <div class="profile-and-settings">
                     <div class="profile-container">
@@ -49,39 +64,25 @@
                         />
                       </div>
                       <div class="user-details">
-                        <p>User name</p>
+                        <p>samuel_muze</p>
                         <p>premium</p>
                       </div>
                     </div>
                     <!-- favs and settings -->
                     <div class="fav-and-settings">
-                      <i class="fa-light fa-heart"></i>
-                      <i class="fa-light fa-heart"></i>
+                      <button>
+                        <i data-lucide="settings"></i>
+                      </button>
+                      <button>
+                        <i data-lucide="heart"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </header>
 
-            <div class="song-list">
-             
-             
-            </div>
-
-            <div class="categories">
-              <h3>Select Categories</h3>
-              <div class="category-btns">
-                <button>All</button>
-                <button>Gospel</button>
-                <button>Jazz</button>
-                <button>Orchestra</button>
-                <button>Raggae</button>
-                <button>RnB</button>
-                <button>Soul</button>
-                <button>Ministrations</button>
-                <button>Hip Hop</button>
-              </div>
-            </div>
+            <div class="song-list"></div>
           </div>
         </div>
         <!-- player -->
@@ -89,7 +90,7 @@
           <div class="now-playing">
             <div class="song-details">
               <div class="playing-cover-art">
-                <img src="./assets/images/profile2.jpg" alt="Cover art"/>
+                <img src="./assets/images/profile2.jpg" alt="Cover art" />
               </div>
               <div class="song-info">
                 <p>Song Title</p>
@@ -99,9 +100,12 @@
 
             <!-- actions -->
             <div class="action-btns">
-              <button>Prev</button>
-              <button>Play</button>
-              <button>Next</button>
+              <button><i data-lucide="skip-back"></i></button>
+              <button>
+                <i class="play-icon" data-lucide="play"></i>
+                <i class="pause-icon" data-lucide="pause"></i>
+              </button>
+              <button><i data-lucide="skip-forward"></i></button>
             </div>
 
             <!-- progress bar -->
@@ -119,15 +123,21 @@
               </div>
             </div>
             <!-- other-actions -->
-             <div class="other-actions">
-              <button>fav</button>
-              <button>Shuffle</button>
-              <button>Reapeat</button>
-              <button>Volume</button>
-             </div>
+            <div class="other-actions">
+              <button><i data-lucide="heart"></i></button>
+              <button><i data-lucide="shuffle"></i></button>
+              <button><i data-lucide="repeat"></i></button>
+              <button><i data-lucide="volume"></i></button>
+            </div>
           </div>
         </div>
       </div>
     </main>
+
+    <!-- lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+    </script>
   </body>
 </html>
