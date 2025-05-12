@@ -1,17 +1,22 @@
 import songs from "./playlist.js";
 
+import { audio } from "../scripts/player.js";
 
-// selectors
-const playerPlay = document.querySelector(".action-btns button:nth-child(2")
-
-
-
-
-
-
-
-
-
+// __mocks__/audio.js
+ class Audio {
+  constructor() {
+    this.paused = true;
+    this.currentTime = 0;
+    this.duration = 180;
+  }
+  play() {
+    this.paused = false;
+    return Promise.resolve();
+  }
+  pause() {
+    this.paused = true;
+  }
+}
 
 
 
@@ -19,12 +24,11 @@ const playerPlay = document.querySelector(".action-btns button:nth-child(2")
 function togglePlay() {
   if (audio.paused) {
     audio.play();
-    playerPlay.textContent = "Pause";
-  } else {
+  } else if (!audio.paused) {
     audio.pause();
-    playerPlay.textContent = "Play";
   }
 }
 
 
-module.exports = {songs, togglePlay}
+
+module.exports = {Audio, audio, songs, togglePlay}

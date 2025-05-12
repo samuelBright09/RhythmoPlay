@@ -1,6 +1,6 @@
 import songs from "./playlist.js";
 
-const audio = new Audio();
+ export const audio = new Audio();
 let currentSongIndex = 0;
 
 // Select elements
