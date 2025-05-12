@@ -172,12 +172,11 @@ main {
 /* SONG LIST */
 .song-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* responsive */
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   flex-grow: 1;
   overflow-y: auto;
-  overflow-x: hidden; /* prevents horizontal scroll */
-  max-width: 100%; /* ensure it doesn't stretch */
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .song-list::-webkit-scrollbar {
@@ -212,16 +211,6 @@ main {
   color: var(--almost-white);
   opacity: 1;
   transition: opacity 0.6s ease-in-out;
-}
-
-.overlay button {
-  display: none;
-  background-color: var(--orange);
-  color: var(--almost-white);
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
 }
 
 .song-card:hover .overlay {
@@ -259,11 +248,17 @@ main {
   transform-origin: center;
 }
 
+.song-info>p:first-child {
+  font-size: larger;
+font-weight: bolder;
+}
+
+
+
 .song-info > p {
   white-space: nowrap;
   animation: rotateText 4s infinite alternate ease-in-out;
-  display: inline-block;
-  
+  display: inline-block; 
 }
 
 @keyframes rotateText {
