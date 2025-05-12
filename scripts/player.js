@@ -21,69 +21,89 @@ const pauseIcon = document.querySelector(".pause-icon");
 
 // load songs
 async function loadSongsInOrder() {
-  const songPromises = songs.map((song, index) =>
-    fetch(song.songUrl)
-      .then((response) => response.blob())
-      .then((blob) => {
-        return new Promise((resolve) => {
-          jsmediatags.read(blob, {
-            onSuccess: (tag) => {
-              // Extract metadata
-              const title = tag.tags.title || "Unknown Title";
-              const artist = tag.tags.artist || "Unknown Artist";
-              let coverUrl = "./assets/images/default-disc.jpg";
+  const loadingContainer = document.createElement('div');
+  loadingContainer.className = 'loading-container';
+  loadingContainer.innerHTML = `
+    <div class="loading-spinner"></div>
+    <p>Loading songs...</p>
+  `;
+  document.body.appendChild(loadingContainer);
 
-              if (tag.tags.picture) {
-                const { data, format } = tag.tags.picture;
-                const base64String = btoa(
-                  new Uint8Array(data).reduce(
-                    (data, byte) => data + String.fromCharCode(byte),
-                    ""
-                  )
-                );
-                coverUrl = `data:${format};base64,${base64String}`;
-              }
-
-              // Store metadata with the song
-              resolve({
-                ...song,
-                title,
-                artist,
-                coverUrl,
-                originalIndex: index,
-              });
-            },
-            onError: () => {
-              resolve({
-                ...song,
-                title: "Unknown Title",
-                artist: "Unknown Artist",
-                coverUrl: "./assets/images/default-disc.jpg",
-                originalIndex: index,
-              });
-            },
+  try {
+    const songPromises = songs.map((song, index) => 
+      fetch(song.songUrl)
+        .then(response => {
+          if (!response.ok) throw new Error('Network response was not ok');
+          return response.blob();
+        })
+        .then(blob => {
+          return new Promise((resolve) => {
+            jsmediatags.read(blob, {
+              onSuccess: (tag) => {
+                const title = tag.tags.title || "Unknown Title";
+                const artist = tag.tags.artist || "Unknown Artist";
+                let coverUrl = "./assets/images/default-disc.jpg";
+                
+                if (tag.tags.picture) {
+                  const { data, format } = tag.tags.picture;
+                  const base64String = btoa(
+                    new Uint8Array(data).reduce(
+                      (data, byte) => data + String.fromCharCode(byte),
+                      ""
+                    )
+                  );
+                  coverUrl = `data:${format};base64,${base64String}`;
+                }
+                
+                resolve({ 
+                  ...song, 
+                  title, 
+                  artist, 
+                  coverUrl, 
+                  originalIndex: index 
+                });
+              },
+              onError: () => {
+                resolve({ 
+                  ...song, 
+                  title: "Unknown Title",
+                  artist: "Unknown Artist",
+                  coverUrl: "./assets/images/default-disc.jpg", 
+                  originalIndex: index 
+                });
+              },
+            });
           });
-        });
-      })
-      .catch(() => {
-        return {
-          ...song,
-          title: "Unknown Title",
-          artist: "Unknown Artist",
-          coverUrl: "./assets/images/default-disc.jpg",
-          originalIndex: index,
-        };
-      })
-  );
+        })
+        .catch(() => {
+          return { 
+            ...song, 
+            title: "Unknown Title",
+            artist: "Unknown Artist",
+            coverUrl: "./assets/images/default-disc.jpg", 
+            originalIndex: index 
+          };
+        })
+    );
 
-  const songsWithMetadata = await Promise.all(songPromises);
-  songsWithMetadata.sort((a, b) => a.originalIndex - b.originalIndex);
-
-  songsWithMetadata.forEach((song) => {
-    createSongCard(song, song.coverUrl);
-  });
-
-  songs = songsWithMetadata;
+    const songsWithMetadata = await Promise.all(songPromises);
+    songsWithMetadata.sort((a, b) => a.originalIndex - b.originalIndex);
+    
+    songsWithMetadata.forEach(song => {
+      createSongCard(song, song.coverUrl);
+    });
+    
+    songs = songsWithMetadata;
+  } catch (error) {
+    console.error("Failed to load songs:", error);
+    const errorElement = document.createElement('div');
+    errorElement.className = 'error-message';
+    errorElement.textContent = 'Failed to load songs. Please try again.';
+    document.body.appendChild(errorElement);
+  } finally {
+    // Remove loading indicator whether successful or not
+    loadingContainer.remove();
+  }
 }
 
 loadSongsInOrder();
