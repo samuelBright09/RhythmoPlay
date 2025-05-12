@@ -226,3 +226,4 @@ audio.addEventListener("timeupdate", updateProgress);
 
 // Initial Load
 loadSong(currentSongIndex);
+loadSongsInOrder();
