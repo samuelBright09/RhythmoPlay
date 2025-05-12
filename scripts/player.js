@@ -15,42 +15,14 @@ const nowPlayingCoverArt = document.querySelector(".playing-cover-art img");
 const nowPlayingTitle = document.querySelector(".song-info p:first-child");
 const nowPlayingArtist = document.querySelector(".song-info p:last-child");
 const songContainer = document.querySelector(".song-list");
+const playIcon = document.querySelector(".play-icon")
+const pauseIcon = document.querySelector(".pause-icon")
 
 // Load all songs & metadata
 async function loadAllSongsImage() {
-  const songDataArray = [];
-
-  for (let index = 0; index < songs.length; index++) {
-    const song = songs[index];
-    
-    try {
-      const response = await fetch(song.songUrl);
-      const blob = await response.blob();
-
-      const tag = await jsmediatags.read(blob);
-      
-      let coverUrl = "./assets/images/default-disc.jpg"; // Default cover
-      if (tag.tags.picture) {
-        const { data, format } = tag.tags.picture;
-        const base64String = btoa(
-          new Uint8Array(data).reduce((data, byte) => data + String.fromCharCode(byte), "")
-        );
-        coverUrl = `data:${format};base64,${base64String}`;
-      }
-
-      songDataArray.push({ song, coverUrl, index }); // Preserve index for sorting
-
-    } catch (error) {
-      console.error(`Error fetching metadata for ${song.title}:`, error);
-      songDataArray.push({ song, coverUrl: "./assets/images/default-disc.jpg", index }); // Fallback
-    }
+ 
   }
 
-  // Sort songs by their original index before adding them to the UI
-  songDataArray.sort((a, b) => a.index - b.index).forEach(({ song, coverUrl }) => {
-    createSongCard(song, coverUrl);
-  });
-}
 
 // Create song card
 function createSongCard(song, coverUrl) {
@@ -110,10 +82,12 @@ function loadSong(index) {
 function togglePlay() {
   if (audio.paused) {
     audio.play();
-    playButton.textContent = "Pause";
-  } else {
+    playIcon.style.display = "none"
+    pauseIcon.style.display = "block"
+  } else if(!audio.paused) {
     audio.pause();
-    playButton.textContent = "Play";
+     playIcon.style.display = "block"
+    pauseIcon.style.display = "none"
   }
 }
 
@@ -121,13 +95,13 @@ function togglePlay() {
 function nextSong() {
   currentSongIndex = (currentSongIndex + 1) % songs.length;
   loadSong(currentSongIndex);
-  audio.play();
+  togglePlay()
 }
 
 function prevSong() {
   currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
   loadSong(currentSongIndex);
-  audio.play();
+  togglePlay()
 }
 
 // Update Progress Bar
