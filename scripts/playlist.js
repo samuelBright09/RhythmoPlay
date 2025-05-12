@@ -27,19 +27,19 @@ const songs = [
     id: 7,
     songUrl: "./assets/audios/Dunsin-Oyekan-I-Will-Stay-(320).mp3",
   },
-  // {
-  //   id: 8,
-  //   songUrl: "./assets/audios/Dunsin Oyekan - Finger of God (320)",
-  // },
-  // {
-  //   id: 7,
-  //   songUrl: "./assets/audios/Dunsin Oyekan - Crown of Souls (320)",
-  // },
-  // {
-  //   id: 8,
-  //   songUrl:
-  //     "./assets/audios/CITY OF GOD - Dunsin Oyekan @dunsinoyekan @worship @cityofgod",
-  // },
+  {
+    id: 8,
+    songUrl: "./assets/audios/Dunsin Oyekan - Finger of God (320).mp3",
+  },
+  {
+    id: 7,
+    songUrl: "./assets/audios/Dunsin Oyekan - Crown of Souls (320).mp3",
+  },
+  {
+    id: 8,
+    songUrl:
+      "./assets/audios/CITY OF GOD - Dunsin Oyekan @dunsinoyekan @worship @cityofgod.mp3",
+  },
 ];
 
 export default songs;
